@@ -1,4 +1,6 @@
 Officegame::Application.routes.draw do
     root to: "users#index"
-    resources :users
+    resources :users do
+        collection { get "search" }
+    end
 end

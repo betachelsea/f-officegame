@@ -28,7 +28,8 @@ class UsersController < ApplicationController
     def create
         session_id = ([*('A'..'Z'),*('0'..'9')]-%w(0 1 I O)).sample(16).join
         @user = User.new(session_id: session_id)
-        cookies.signed[:sid] = session_id
+        cookies[:sid] = session_id
+        binding.pry
         if @user.save
             render :json => @user
         else
@@ -39,6 +40,12 @@ class UsersController < ApplicationController
     end
 
     def destroy
+    end
+
+    def search
+        session_id = cookies[:sid]
+        @user = User.search(session_id)
+        render :json => @user
     end
 
     private
