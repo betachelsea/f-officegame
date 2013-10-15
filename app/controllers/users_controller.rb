@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     def index
         @user = User.order("id")
         respond_to do |format|
+            format.html
             format.json { render :json => @user }
         end
     end
