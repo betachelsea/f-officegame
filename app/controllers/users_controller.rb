@@ -3,16 +3,20 @@
 class UsersController < ApplicationController
 
     def index
-        @user = User.order("id")
+        @users = User.order("id")
         respond_to do |format|
             format.html
-            format.json { render :json => @user }
+            format.json { render :json => @users }
         end
     end
 
     def show
         @user = User.find(params[:id])
-        render :json => @user
+        session_id = cookies[:sid]
+        respond_to do |format|
+            format.html
+            format.json { render :json => @user }
+        end
     end
 
     def new
@@ -22,7 +26,9 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(session_id: "hogehoge")
+        session_id = ([*('A'..'Z'),*('0'..'9')]-%w(0 1 I O)).sample(16).join
+        @user = User.new(session_id: session_id)
+        cookies.signed[:sid] = session_id
         if @user.save
             render :json => @user
         else
