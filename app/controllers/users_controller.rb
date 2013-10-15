@@ -29,7 +29,6 @@ class UsersController < ApplicationController
         session_id = ([*('A'..'Z'),*('0'..'9')]-%w(0 1 I O)).sample(16).join
         @user = User.new(session_id: session_id)
         cookies[:sid] = session_id
-        binding.pry
         if @user.save
             render :json => @user
         else
