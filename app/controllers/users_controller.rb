@@ -20,6 +20,14 @@ class UsersController < ApplicationController
     end
 
     def create
+        @user = User.new(session_id: "hogehoge")
+        if @user.save
+            respond_to do |format|
+                format.html { render "index" }
+                format.json { render :json => @user }
+            end
+        else
+        end
     end
 
     def update
