@@ -11,6 +11,8 @@ class UsersController < ApplicationController
     end
 
     def show
+        @user = User.find(params[:id])
+        render :json => @user
     end
 
     def new
@@ -22,10 +24,7 @@ class UsersController < ApplicationController
     def create
         @user = User.new(session_id: "hogehoge")
         if @user.save
-            respond_to do |format|
-                format.html { render "index" }
-                format.json { render :json => @user }
-            end
+            render :json => @user
         else
         end
     end
