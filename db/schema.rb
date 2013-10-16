@@ -14,6 +14,13 @@
 ActiveRecord::Schema.define(version: 20131015235124) do
 
   create_table "boards", force: true do |t|
+    t.string   "state",               null: false
+    t.integer  "turn",                null: false
+    t.integer  "player1",             null: false
+    t.integer  "player2",             null: false
+    t.integer  "player1_stone_count", null: false
+    t.integer  "player2_stone_count", null: false
+    t.integer  "winner"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
