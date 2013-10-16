@@ -3,4 +3,5 @@ Officegame::Application.routes.draw do
     resources :users do
         collection { get "search" }
     end
+    resources :boards
 end

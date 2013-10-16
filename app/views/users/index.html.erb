@@ -4,6 +4,12 @@
     <%= form.submit %>
 <% end %>
 
+<%= form_for Board.new() do |form| %>
+    <p>player2のID:<%= number_field_tag(:user_id) %></p>
+    <%= form.submit%>
+<% end %>
+
 <p><%= link_to "ユーザ一覧json確認", "/users.json" %></p>
+<p><%= link_to "board一覧のjson確認", "/boards.json" %></p>
 <p><%= link_to "現在のsession_idからひけるユーザを確認", "/users/search" %></p>
 
