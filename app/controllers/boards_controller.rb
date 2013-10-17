@@ -2,7 +2,10 @@ class BoardsController < ApplicationController
 
     def index
         @boards = Board.order("id")
-        render :json => @boards
+        respond_to do |format|
+            format.html
+            format.json { render :json => @boards }
+        end
     end
 
     def show

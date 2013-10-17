@@ -1,16 +1,18 @@
 <p>test on users/index.html</p>
 
+<h1>ユーザ作成</h1>
 <%= form_for User.new() do |form| %>
     <%= form.submit %>
 <% end %>
 
+<h1>新規ボード作成</h1>
 <%= form_for Board.new() do |form| %>
     <p>player2のID:<%= number_field_tag(:opponent_id) %></p>
     <%= form.submit%>
 <% end %>
 
 <p><%= link_to "ユーザ一覧json確認", "/users.json" %></p>
-<p><%= link_to "board一覧のjson確認", "/boards.json" %></p>
+<p><%= link_to "board一覧", "/boards" %></p>
 <p>任意のboard状態を確認するには /boards/:id にアクセス</p>
 <p><%= link_to "現在のsession_idからひけるユーザを確認", "/users/search" %></p>
 
