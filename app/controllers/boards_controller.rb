@@ -1,5 +1,10 @@
 class BoardsController < ApplicationController
 
+    def index
+        @boards = Board.order("id")
+        render :json => @boards
+    end
+
     def create
         @user = User.find_by_session_id(cookies[:sid])
         board_data = Array.new(8).map{Array.new(8,0)}
