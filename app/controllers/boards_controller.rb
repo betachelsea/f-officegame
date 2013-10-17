@@ -32,4 +32,14 @@ class BoardsController < ApplicationController
         end
     end
 
+    def update
+        @board = Board.find(params[:id])
+        board_data = ActiveSupport::JSON.decode(@board.state)
+        board_data[params[:x].to_i][params[:y].to_i] = 1
+        @board.assign_attributes(state: board_data.to_json)
+        if @board.save
+            render :json => @board
+        end
+    end
+
 end

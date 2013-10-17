@@ -8,3 +8,20 @@
 <p>2の石の数/<%= @board.player1_stone_count %></p>
 <p>winner/<%= @board.winner %></p>
 
+<h1>石を置く</h1>
+<%= form_for @board do |form| %>
+    <p>x:(0~7)<%= number_field_tag(:x) %></p>
+    <p>y:(0~7)<%= number_field_tag(:y) %></p>
+    <%= form.submit %>
+<% end %>
+
+<table border=1>
+    <% (0..7).each do |x| %>
+        <tr>
+            <% (0..7).each do |y| %>
+                <td>x</td>
+            <% end %>
+        </tr>
+    <% end %>
+</table>
+
