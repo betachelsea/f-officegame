@@ -2,8 +2,9 @@ class BoardsController < ApplicationController
 
     def create
         @user = User.find_by_session_id(cookies[:sid])
+        board_data = Array.new(8).map{Array.new(8,0)}
         @board = Board.new(
-            state: "{'set'}",
+            state: board_data.to_json,
             turn: 1,
             player1: @user.id,
             player2: params[:opponent_id],
