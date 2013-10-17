@@ -1,2 +1,18 @@
 <p>ボード一覧</p>
+<table border=1>
+    <tr>
+        <th>id</th>
+        <th>先攻ユーザ1</th>
+        <th>後攻ユーザ2</th>
+        <th>勝者</th>
+    </tr>
+    <% @boards.each do |board| %>
+        <tr>
+            <td><%= link_to board.id, board %></td>
+            <td><%= board.player1 %></td>
+            <td><%= board.player2 %></td>
+            <td><%= board.winner %></td>
+        </tr>
+    <% end %>
+</table>
 
