@@ -26,7 +26,8 @@ ActiveRecord::Schema.define(version: 20131015235124) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "session_id", null: false
+    t.text     "session_id", null: false
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
