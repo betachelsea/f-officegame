@@ -6,7 +6,7 @@ class UsersController < ApplicationController
         @users = User.order("id")
         respond_to do |format|
             format.html
-            format.json { render :json => @users }
+            format.json { render :json => @users, callback: params[:callback] }
         end
     end
 
