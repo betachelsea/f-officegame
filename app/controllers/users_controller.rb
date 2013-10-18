@@ -15,7 +15,7 @@ class UsersController < ApplicationController
         session_id = cookies[:sid]
         respond_to do |format|
             format.html
-            format.json { render :json => @user }
+            format.json { render :json => @user, callback: params[:callback] }
         end
     end
 
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
         @user = User.new(session_id: session_id)
         cookies[:sid] = session_id
         if @user.save
-            render :json => @user
+            render :json => @user, callback: params[:callback]
         else
         end
     end
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
     def search
         session_id = cookies[:sid]
         @user = User.search(session_id)
-        render :json => @user
+        render :json => @user, callback: params[:callback]
     end
 
     private

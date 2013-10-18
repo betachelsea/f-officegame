@@ -4,7 +4,7 @@ class BoardsController < ApplicationController
         @boards = Board.order("id")
         respond_to do |format|
             format.html
-            format.json { render :json => @boards }
+            format.json { render :json => @boards, callback: params[:callback] }
         end
     end
 
@@ -12,7 +12,7 @@ class BoardsController < ApplicationController
         @board = Board.find(params[:id])
         respond_to do |format|
             format.html
-            format.json { render :json => @board }
+            format.json { render :json => @board, callback: params[:callback] }
         end
     end
 
@@ -28,7 +28,7 @@ class BoardsController < ApplicationController
             player2_stone_count: 0
         )
         if @board.save
-            render :json => @board
+            render :json => @board, callback: params[:callback]
         end
     end
 
@@ -38,7 +38,7 @@ class BoardsController < ApplicationController
         board_data[params[:x].to_i][params[:y].to_i] = 1
         @board.assign_attributes(state: board_data.to_json)
         if @board.save
-            render :json => @board
+            render :json => @board, callback: params[:callback]
         end
     end
 
