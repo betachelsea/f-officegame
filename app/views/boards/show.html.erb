@@ -1,4 +1,27 @@
-<h1>board情報</h1>
+<h1>石を置く</h1>
+<%= form_for @board do |form| %>
+    <p>x:(0~7)<%= number_field_tag(:x) %></p>
+    <p>y:(0~7)<%= number_field_tag(:y) %></p>
+    <%= form.submit %>
+<% end %>
+
+<% @state = ActiveSupport::JSON.decode(@board.state) %>
+<div>
+     x-><br/>
+    <div style="float:left;">y<br />↓<br /></div>
+    <% @state.each_with_index do |arr, x| %>
+        <div style="float:left;">
+            <% arr.each_with_index do |n, y| %>
+                <% if n == 1 %>●
+                    <% elsif n == 2 %>○
+                <% else %>□<% end %>
+                <br />
+            <% end %>
+        </div>
+    <% end %>
+</div>
+
+<h1 style="clear:both;">board情報</h1>
 <p>id/<%= @board.id %></p>
 <p>state/<%= @board.state %></p>
 <p>turn/<%= @board.turn %></p>
@@ -7,21 +30,4 @@
 <p>1の石の数/<%= @board.player1_stone_count %></p>
 <p>2の石の数/<%= @board.player1_stone_count %></p>
 <p>winner/<%= @board.winner %></p>
-
-<h1>石を置く</h1>
-<%= form_for @board do |form| %>
-    <p>x:(0~7)<%= number_field_tag(:x) %></p>
-    <p>y:(0~7)<%= number_field_tag(:y) %></p>
-    <%= form.submit %>
-<% end %>
-
-<table border=1>
-    <% (0..7).each do |x| %>
-        <tr>
-            <% (0..7).each do |y| %>
-                <td>x</td>
-            <% end %>
-        </tr>
-    <% end %>
-</table>
 
