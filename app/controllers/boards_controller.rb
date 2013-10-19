@@ -19,6 +19,10 @@ class BoardsController < ApplicationController
     def create
         @user = User.find_by_session_id(cookies[:sid])
         board_data = Array.new(8).map{Array.new(8,0)}
+        board_data[4][3] = 1
+        board_data[3][4] = 1
+        board_data[3][3] = 2
+        board_data[4][4] = 2
         @board = Board.new(
             state: board_data.to_json,
             turn: 1,
