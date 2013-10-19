@@ -46,7 +46,7 @@ class BoardsController < ApplicationController
         elsif (@board.player2 == @user.id)
             stone = 2
         end
-        Board.update_state(board_data, params[:x].to_i, params[:y].to_i ,stone)
+        Board.update_state(board_data, params[:x].to_i, params[:y].to_i, stone)
         @board.assign_attributes(state: board_data.to_json)
         if @board.save
             render :json => @board, callback: params[:callback]
