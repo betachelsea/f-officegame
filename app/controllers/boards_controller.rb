@@ -46,8 +46,17 @@ class BoardsController < ApplicationController
         elsif (@board.player2 == @user.id)
             stone = 2
         end
-        Board.update_state(board_data, params[:x].to_i, params[:y].to_i, stone)
-        @board.assign_attributes(state: board_data.to_json)
+
+        if (@board.turn != stone)
+            stone = -1
+        end
+
+        effective = Board.update_state(board_data, params[:x].to_i, params[:y].to_i, stone)
+        next_turn = @board.turn == 1 ? 2 : 1
+        if (!effective)
+            next_turn = @board.turn
+        end
+        @board.assign_attributes(state: board_data.to_json, turn: next_turn)
         if @board.save
             render :json => @board, callback: params[:callback]
         end
