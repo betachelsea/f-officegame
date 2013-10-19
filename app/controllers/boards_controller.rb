@@ -35,7 +35,12 @@ class BoardsController < ApplicationController
     def update
         @board = Board.find(params[:id])
         board_data = ActiveSupport::JSON.decode(@board.state)
-        board_data[params[:x].to_i][params[:y].to_i] = 1
+        @user = User.find_by_session_id(cookies[:sid])
+        if (@board.player1 == @user.id)
+            board_data[params[:x].to_i][params[:y].to_i] = 1
+        elsif (@board.player2 == @user.id)
+             board_data[params[:x].to_i][params[:y].to_i] = 2
+        end
         @board.assign_attributes(state: board_data.to_json)
         if @board.save
             render :json => @board, callback: params[:callback]
