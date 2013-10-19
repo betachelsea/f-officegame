@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
 
     def index
-        @users = User.order("id")
+        @users = User.order("id desc")
         respond_to do |format|
             format.html
             format.json { render :json => @users, callback: params[:callback] }

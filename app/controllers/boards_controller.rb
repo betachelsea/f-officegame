@@ -1,7 +1,7 @@
 class BoardsController < ApplicationController
 
     def index
-        @boards = Board.order("id")
+        @boards = Board.order("id desc")
         respond_to do |format|
             format.html
             format.json { render :json => @boards, callback: params[:callback] }
