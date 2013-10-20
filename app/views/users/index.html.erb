@@ -2,6 +2,7 @@
 
 <h1>ユーザ作成</h1>
 <%= form_for User.new() do |form| %>
+    <p>おなまえ：<%= text_field_tag(:name) %></p>
     <%= form.submit %>
 <% end %>
 

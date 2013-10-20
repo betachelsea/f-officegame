@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
     def create
         session_id = ([*('A'..'Z'),*('0'..'9')]-%w(0 1 I O)).sample(16).join
-        @user = User.new(session_id: session_id)
+        @user = User.new(session_id: session_id, name: params[:name])
         if @user.save
             render :json => @user, callback: params[:callback]
         else
