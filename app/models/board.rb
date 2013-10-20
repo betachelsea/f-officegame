@@ -36,7 +36,9 @@ class Board < ActiveRecord::Base
         end
 
         def reverse?(state, x, x_diff, y, y_diff, player, enemy)
+            return false if (x < 0 || 7 < x || y < 0 || 7 < y)
             check_stone = state[x][y]
+
             if (check_stone == player)
                 true
             elsif (check_stone == enemy)
@@ -44,6 +46,18 @@ class Board < ActiveRecord::Base
             else
                 false
             end
+        end
+
+        def count_stone(state, count_stone)
+            num = 0
+            (0..7).each do |x|
+                (0..7).each do |y|
+                    if (state[x][y] == count_stone)
+                        num += 1
+                    end
+                end
+            end
+            num
         end
 
         def effective_move(state, x, y, player)

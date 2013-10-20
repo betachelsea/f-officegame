@@ -28,8 +28,8 @@ class BoardsController < ApplicationController
             turn: 1,
             player1: @user.id,
             player2: params[:opponent_id],
-            player1_stone_count: 0,
-            player2_stone_count: 0
+            player1_stone_count: 2,
+            player2_stone_count: 2
         )
         if @board.save
             render :json => @board, callback: params[:callback]
@@ -56,7 +56,17 @@ class BoardsController < ApplicationController
         if (!effective)
             next_turn = @board.turn
         end
-        @board.assign_attributes(state: board_data.to_json, turn: next_turn)
+        stone_1 = Board.count_stone(board_data, 1)
+        stone_2 = Board.count_stone(board_data, 2)
+        winner = nil
+        if (stone_1 + stone_2 == 8*8)
+            winner = stone_1 > stone_2 ? 1 : 2
+        end
+        @board.assign_attributes(state: board_data.to_json,
+                                 turn: next_turn,
+                                 player1_stone_count: stone_1,
+                                 player2_stone_count: stone_2,
+                                 winner: winner)
         if @board.save
             render :json => @board, callback: params[:callback]
         end
