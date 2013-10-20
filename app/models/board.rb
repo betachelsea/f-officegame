@@ -17,7 +17,6 @@ class Board < ActiveRecord::Base
                     if (enemy == state[x+x_diff][y+y_diff])
                         if (reverse?(state, x+x_diff, x_diff, y+y_diff, y_diff, player, enemy))
                             continuous_reverse(state, x+x_diff, x_diff, y+y_diff, y_diff, player, enemy)
-                            #state[x][y]=player
                             effective = true
                         end
                     end
@@ -25,7 +24,6 @@ class Board < ActiveRecord::Base
             end
             state[x][y]=player if effective
             effective
-            #state[x][y] = player
         end
 
         def continuous_reverse(state, x, x_diff, y, y_diff, player, enemy)
