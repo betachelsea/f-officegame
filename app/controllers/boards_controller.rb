@@ -17,7 +17,7 @@ class BoardsController < ApplicationController
     end
 
     def create
-        @user = User.find_by_session_id(cookies[:sid])
+        @user = User.find_by_session_id(params[:sid])
         board_data = Array.new(8).map{Array.new(8,0)}
         board_data[4][3] = 1
         board_data[3][4] = 1
@@ -39,7 +39,7 @@ class BoardsController < ApplicationController
     def update
         @board = Board.find(params[:id])
         board_data = ActiveSupport::JSON.decode(@board.state)
-        @user = User.find_by_session_id(cookies[:sid])
+        @user = User.find_by_session_id(params[:sid])
         stone = -1
         if (@board.player1 == @user.id)
             stone = 1

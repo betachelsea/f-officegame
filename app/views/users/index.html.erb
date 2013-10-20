@@ -8,6 +8,7 @@
 <h1>新規ボード作成</h1>
 <%= form_for Board.new() do |form| %>
     <p>player2のID:<%= number_field_tag(:opponent_id) %></p>
+    <p>自分(player1・先攻・黒）のsid:<%= text_field_tag(:sid) %></p>
     <%= form.submit%>
 <% end %>
 

@@ -2,6 +2,7 @@
 <%= form_for @board do |form| %>
     <p>x:(0~7)<%= number_field_tag(:x) %></p>
     <p>y:(0~7)<%= number_field_tag(:y) %></p>
+    <p>自分のsid<%= text_field_tag(:sid) %></p>
     <%= form.submit %>
 <% end %>
 
