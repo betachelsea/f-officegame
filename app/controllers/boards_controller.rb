@@ -76,7 +76,10 @@ class BoardsController < ApplicationController
         @board = Board.find(params[:id])
         @user = User.find_by_session_id(params[:sid])
 
-        render :json => @board, callback: params[:callback]
+        respond_to do |format|
+            format.html { redirect_to :action => "show", :id => @board.id }
+            format.json { render :json => @board, callback: params[:callback] }
+        end
         #自分のsidをもらう
         #パスする
     end
