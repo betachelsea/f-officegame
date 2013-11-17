@@ -76,12 +76,18 @@ class BoardsController < ApplicationController
         @board = Board.find(params[:id])
         @user = User.find_by_session_id(params[:sid])
 
-        respond_to do |format|
-            format.html { redirect_to :action => "show", :id => @board.id }
-            format.json { render :json => @board, callback: params[:callback] }
+        #パスが正当かどうか確認後実施
+        turn_user_id = @board.turn == 1 ? @board.player1 : @board.player2
+        if (turn_user_id == @user.id)
+            @board.turn = @board.turn == 1 ? 2 : 1
         end
-        #自分のsidをもらう
-        #パスする
+
+        if @board.save
+            respond_to do |format|
+                format.html { redirect_to :action => "show", :id => @board.id }
+                format.json { render :json => @board, callback: params[:callback] }
+            end
+        end
     end
 
 end
