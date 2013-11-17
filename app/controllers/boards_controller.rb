@@ -72,4 +72,13 @@ class BoardsController < ApplicationController
         end
     end
 
+    def pass
+        @board = Board.find(params[:id])
+        @user = User.find_by_session_id(params[:sid])
+
+        render :json => @board, callback: params[:callback]
+        #自分のsidをもらう
+        #パスする
+    end
+
 end

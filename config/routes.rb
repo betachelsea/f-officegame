@@ -4,4 +4,5 @@ Officegame::Application.routes.draw do
         collection { get "search" }
     end
     resources :boards
+    post 'boards/:id/pass', to: 'boards#pass'
 end

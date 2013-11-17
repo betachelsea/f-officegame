@@ -6,6 +6,11 @@
     <%= form.submit %>
 <% end %>
 
+<%= form_tag("/boards/#{@board.id}/pass") do %>
+    <p>パスします！sid<%= text_field_tag(:sid) %></p>
+    <%= submit_tag "パス！" %>
+<% end %>
+
 <% @state = ActiveSupport::JSON.decode(@board.state) %>
 <div>
      x-><br/>
